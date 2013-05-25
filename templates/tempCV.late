@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head><TITLE>Example CV</TITLE></head>
+
+
+<body style="background: gray;">
+
+<div style="background: white; border: thin sold black; width: 40em; margin-left:auto; margin-right:auto;     letter-spacing:0.3em;
+    font-variant:small-caps;
+    font-family:Verdana;
+    font-size: medium;
+    border-bottom: thin solid gray;
+    padding-top: 20px;
+    padding-left: 1em;
+">
+<center>
+<h2>Curriculum Vitae</h2>
+<h1>George Nobody Jr., PhD</h1>
+</center>
+<br>
+
+<h3>My Life</h3>
+<div style="text-align: justify; padding-left: 2em; padding-right: 2em;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc hendrerit tristique mi. Aenean vel magna in libero tempus facilisis. Donec at elit sit amet pede commodo suscipit.
+<br><br>
+Aenean id orci. Etiam vel augue. Curabitur volutpat, eros et gravida iaculis, ante nulla fermentum eros, ut condimentum libero ipsum at enim. Nam justo ante, facilisis at, egestas ac, commodo sed, lectus.
+</div>
+<h3>Education</h3>
+<ul>
+<li><span style="font-weight: bold">1970-1974:</span> Elementary School </li>
+<li><span style="font-weight: bold">1974-1978:</span> Middle School </li>
+<li><span style="font-weight: bold">1978-1982:</span> High School </li>
+<li><span style="font-weight: bold">1982-1986:</span> University </li>
+<li><span style="font-weight: bold">1986-1990:</span> PhD </li>
+</ul>
+
+<h3>My Papers</h3>
+
+%%GRP%%(inc:year; author!={"Unicode"}; author!={"Lamport"};)
+<h4>Year published: %%name%%</h4>
+<ul>
+%%FOR%%(inc:title; author!={"Unicode"}; author!={"Lamport"};)
+
+<li><span style="font-variant:normal; font-size:smaller; letter-spacing:0.1em;">George Nobody and %%author%%</span><br><span style="font-variant:normal; font-size:smaller; letter-spacing:0.2em;"><i>%%title%%</i></span></li>
+
+%%ROF%%
+</ul>
+
+%%PRG%%
+<br><br>
+
+
+</div>
+</body>
+</html>

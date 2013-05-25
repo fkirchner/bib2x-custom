@@ -1,0 +1,32 @@
+CC = g++
+LD = gcc
+YACC = bison
+LEX = lex
+
+all: lex.bib.c bib.tab.c rename
+
+
+lex.template.c: template.l
+	$(LEX) -Ptemplate template.l
+
+lex.bib.c:  bib.l
+	$(LEX) -Pbib bib.l
+
+bib.tab.c: bib.y
+	$(YACC) -p bib -dv bib.y
+
+template.tab.c: template.y
+	$(YACC) -p template -dv template.y
+
+.o.c: 
+	$(CC) $(CFLAGS) -c $<
+
+
+rename: bib.tab.c lex.bib.c template.tab.c lex.template.c
+	mv bib.tab.c bib.tab.cxx; mv lex.bib.c lex.yy.cxx; mv lex.template.c template.yy.cxx; mv template.tab.c template.tab.cxx;
+
+bib.o:
+	$(CC) $(CFLAGS) -c bib.cxx 
+
+clean:
+	rm -f bib.tab.c bib.tab.h lex.yy.c y.output bib *.o

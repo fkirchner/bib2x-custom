@@ -1,0 +1,15 @@
+<html><body>
+    %%GRP%%  (inc: author)<div style="...">
+        Works by <b>%%name%%</b> were published in
+        <ul>
+            %%GRP%%(inc:year)
+            <li style="color:blue">%%name%%</li>
+            <ul>
+            %%FOR%%(inc:title)
+            <li style="color:green">%%title%%</li>
+            %%ROF%%
+            </ul>
+            %%PRG%%
+        </ul></div><br>
+    %%PRG%%
+</body></html>

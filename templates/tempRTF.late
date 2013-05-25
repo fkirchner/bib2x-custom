@@ -1,0 +1,23 @@
+{\rtf1\mac\ansicpg10000
+
+%%GRP%% ( inc : author )
+
+\cf0 Haupt-Kategorie: %%name%%\
+%%GRP%%(inc:year)
+Unter-Kategorie: %%name%%\
+%%FOR%%(inc:title)
+%%$bibtype%%: %%$bibkey%%\
+\pard\ql\qnatural\pardirnatural
+\ls1\ilvl0\cf0 %%BIB%%(inc:author;)
+G = "{\\listtext	\\'a5	}%%MOD_UB%%(%%name%%): %%content%%\\
+"
+M = ""
+E = ""
+N = "{\\listtext	\\'a5	}%%MOD_UB%%(%%name%%): %%content%%\\
+"
+%%BIB%%\pard\ql\qnatural\pardirnatural
+\cf0 \
+%%ROF%%\
+%%PRG%%
+
+%%PRG%%}

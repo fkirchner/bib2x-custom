@@ -1,0 +1,66 @@
+%%def%% 0001 "<span style=\"color:green\"><b>"
+%%def%% 0002 "</b></span>"
+%%def%% 0003 "<span style=\"color:red\">"
+%%def%% 0004 "</span>"
+%%def%% 0005 " "
+%%def%% 0006 "<a href=\""
+%%def%% 0007 "\">"
+%%def%% 0008 "</a>"
+%%cls%% werke = {proceedings, book}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head><TITLE>xandi's BibTeX collection</TITLE></head>
+
+
+<body>
+<br>
+
+%%GRP%% ( inc : author )
+<h2>Works by Author: %%name%%</h2>
+<br>
+
+%%GRP%%(inc:year)
+<h3>Year published: %%name%%</h3>
+<br><ol>
+
+%%FOR%%(inc:title)
+
+<li><ul><li>ODB-ID: %%$odbid%%</li>
+
+%%BIB%%(inc: #author, #title; author != { "blub" }; )
+G = "<li>%%MOD_UC%%(%%name%%): %%MOD_LC%%(%%content%%)</li>" 
+M = "<li>%%name%%: <span style=\"color:red\">MISSING</span></li>" 
+E = "<li>%%name%%: <span style=\"color:yellow\">EMPTY</span></li>" 
+N = "<li>%%MOD_UC%%(%%name%%): %%MOD_LC%%(%%content%%)</li>"
+%%BIB%%
+
+
+%%BIB%%(inc:!author,!title,!url,note;)
+G = "<li>%%MOD_UB%%(%%name%%): %%content%%</li>"
+M = ""
+E = ""
+N = "<li>%%MOD_UB%%(%%name%%): %%content%%</li>"
+%%BIB%%
+
+
+%%BIB%%(inc:#url;)
+G = "<li>%%MOD_UC%%(%%name%%): <a href=\"%%content%%\"> %%content%% </a></li>"
+M = ""
+E = ""
+N = "<li>%%MOD_UC%%(%%name%%): <a href=\"%%content%%\"> %%content%% </a></li>"
+%%BIB%%</ul></li><br>
+
+
+%%ROF%%
+<br><br></ol>
+
+%%PRG%%
+<br><br>
+
+%%PRG%%
+
+<br><br><br><br>
+
+</body>
+</html>

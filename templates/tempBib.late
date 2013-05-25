@@ -1,0 +1,27 @@
+\%\%\% BibTeX-File
+\%\%\% generated using Bib2x 
+
+@string { missing, "Missing!" }
+
+%%GRP%%(inc:author;year!={"2001"};)
+\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%
+\%\%\% Works by %%name%%
+\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%
+%%FOR%%(inc:title)
+%%$bibtype%%{%%$bibkey%%,
+%%BIB%%(inc:author,title,year,!category;)
+G = "	%%name%%    	= \"%%content%%\",
+"
+N = "	%%name%%    	= \"%%content%%\",
+"
+E = "	%%name%%    	= \"\",
+"
+M = "	%%name%%    	= missing,
+"
+%%BIB%%%%BIB%%(inc:#category;)
+N = "	%%name%%    	= %%step:0-x%%("\"";"\" # \"";"\",")
+"
+E = "	%%name%%    	= \"\",
+"
+%%BIB%%}
+%%ROF%%%%PRG%%

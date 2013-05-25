@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="BibX - BibTeX-Tool, (c) Alexander Feder">
+<TITLE>xandi's BibTeX collection</TITLE>
+
+<style type="text/css">
+
+body    { 
+        height: 95\%;
+        width: 95\%;
+        background:white;
+        }
+   
+div.TOC {
+		position: absolute;
+		top: 1em;
+		left: 1em;
+        width: 15\%;
+        text-align: left;
+		padding: 5px;
+		}
+
+div.BibTOC {
+		position: relative;
+		background: #eeeeee;
+		left: 1em;
+		border: thin solid gray;
+        text-align: left;
+		padding: 5px;
+		}
+
+div.AuthorTOC {
+		position: relative;
+		background: #eeeeee;
+		left: 1em;
+		border: thin solid gray;
+        text-align: left;
+		padding: 5px;
+		}
+
+h1.myheading { position: relative; left: 20\%; }
+
+table.EntryTable
+        {
+		position: relative;
+		left: 20\%;
+		width: 80\%;
+		border:thin solid black;
+		border-spacing:10px
+        font: 15px Impact, Helvetica Narrow, sans-serif;
+        }
+
+
+
+span.EntryType
+        {
+		position: relative;
+		left: 20\%;
+		}
+
+span.EntryKey
+        {
+		font: bold;
+		position: relative;
+		left: 20\%;
+		}
+		
+td.author
+		{
+		background: #eeeeee;
+		}
+td.title
+		{
+		background: #e0e0e0;
+		}
+		
+td.journal
+		{
+		background: #dedede;
+		}
+td.pages
+		{
+		background: #dadada;
+		}
+td.publisher
+		{
+		background: #d5d5d5;
+		}
+		
+td.year
+		{
+		background: #d0d0d0;
+		}
+
+td.url
+		{
+		background: #cdcdcd;
+		}
+
+div.NameText
+        {
+		font: bold;
+		color: green;
+        }
+
+div.NameTextMissing
+        {
+		font: bold;
+		color: red;
+        }
+
+div.ContentText
+        {
+		font: bold;
+        }
+
+div.TOCEntry
+        {
+		padding-bottom: 0.5em;
+        }
+
+span.Text_math
+        {
+        color: gray;
+        }
+
+span.Text_missing
+        {
+        color: red;
+        }
+
+span.Text_path
+        {
+        color: blue;
+        }
+
+span.Text_latex
+        {
+        color: orange;
+        }
+span.Text_accent
+        {
+        color: magenta;
+        }
+
+span.Explizit
+		{
+		color: green;
+		}
+
+
+a       {
+        text-decoration:none;
+        }
+
+a:hover 
+        { 
+        color: #a18323;
+        }
+
+
+</style>
+
+
+</head>
+
+<body>
+<div class="TOC">
+<div class="BibTOC">
+%%FOR%%(dec:author)
+<a href="#%%$bibkey%%">%%$bibkey%%</a><br>
+%%ROF%%
+<br></div><br>
+
+<div class="AuthorTOC">
+%%GRP%%(inc:author)
+<div class="TOCEntry"><a href="#%%name%%">%%name%%</a></div><br>
+%%PRG%%
+<br></div><br>
+</div>
+
+%%GRP%%(inc:author)
+<a class="EntryGoto" id="%%name%%"></a>
+<h1 class="myheading">%%name%%</h1>
+%%FOR%%(inc:title)
+<div class="BibEntry">
+<a class="EntryGoto" id="%%$bibkey%%"></a>
+<span class="EntryType">%%$bibtype%%: </span> <span class="EntryKey">%%$bibkey%%</span><br>
+
+
+<table class="EntryTable">
+<tr class="TagRow">
+	<td class="NameCollumn"><div class="EntryTableInfo">Tag</div></td>
+	<td class="ContentColumn"><div class="EntryTableInfo">Content</div></td>
+</tr>
+
+%%BIB%%(inc:author,title,year;)
+N = "<tr class=\"TagRow\">
+     <td class=\"%%name%%\" class=\"NameCollumn\"><div class=\"NameText\">%%name%%</div></td>
+     <td class=\"%%name%%\" class=\"ContentColumn\"><span class=\"ContentText\"><span class=\"Text_word\">%%content%%</span></span></td>
+	 </tr>"
+G = "<tr class=\"TagRow\">
+     <td class=\"%%name%%\" class=\"NameCollumn\"><div class=\"NameText\">%%name%%</div></td>
+     <td class=\"%%name%%\" class=\"ContentColumn\"><span class=\"ContentText\"><span class=\"Text_word\">%%content%%</span></span></td>
+	 </tr>"
+%%BIB%%
+</table></div><br><br>
+
+%%ROF%%
+
+%%PRG%%
+<br>

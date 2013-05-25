@@ -1,0 +1,99 @@
+/*
+This template tries to show, that almost anything is possible with bib2x-templates.
+The outcome of this template is C++ Code, which you can compile.
+It does not do much but fill objects with the bibliographic entries and print them afterwards.
+
+
+*/
+
+
+
+#include <iostream>
+#include <string>
+#include <map>
+
+typedef std::map<std::string, std::string> CName2Str;
+
+class CEntry
+{
+private:
+    std::string m_sName;
+    std::string m_sType;
+    CName2Str m_oAttrib;
+    CEntry* m_poNext;
+
+
+    void Print ( )
+        {
+        CName2Str::iterator mIt = m_oAttrib.begin();
+        CName2Str::iterator mItEnd = m_oAttrib.end();
+    
+        std::cout << m_sName << "(" << m_sType << "):" << std::endl;
+
+        for ( ; mIt != mItEnd; ++mIt )
+            {
+            std::cout << "\t" << mIt->first << "\t:" << mIt->second << std::endl;
+            }
+        std::cout << std::endl;
+        }
+
+public:
+
+    CEntry ( std::string sName, std::string sType )
+        : m_sName ( sName ),
+          m_sType ( sType )
+        {
+        m_poNext = 0;
+        }
+    
+    void FollowedBy ( CEntry* poNext )
+        {
+        m_poNext = poNext;
+        }
+
+    void AddAttrib ( std::string sName, std::string sContent )
+        {
+        m_oAttrib[sName] = sContent;
+        }
+
+    void PrintRecursively ()
+        {
+        Print();
+        if ( m_poNext )
+            m_poNext->PrintRecursively ();
+        }
+
+};
+
+
+
+int main ( void )
+    {
+    CEntry* poEntry = 0;
+    CEntry* poPrev = 0;
+    CEntry* poFirst = 0;
+%%GRP%%(inc:author)
+%%FOR%%(inc:title)
+    poPrev = poEntry;
+    poEntry = new CEntry ( "%%$bibkey%%", "%%$bibtype%%" );
+    if ( poPrev )
+        poPrev->FollowedBy(poEntry);
+    if ( !poFirst )
+        poFirst = poEntry;
+
+%%BIB%%(inc:author,title,year;)
+G = "    poEntry->AddAttrib(\"%%name%%\", \"%%content%%\");
+"
+N = "    poEntry->AddAttrib(\"%%name%%\", \"%%content%%\");
+"
+E = "    poEntry->AddAttrib(\"%%name%%\", \"--EMPTY--\");
+"
+M = "    poEntry->AddAttrib(\"%%name%%\", \"--MISSING--\");
+"
+%%BIB%%
+
+%%ROF%%%%PRG%%
+
+    poFirst->PrintRecursively();
+    }
+

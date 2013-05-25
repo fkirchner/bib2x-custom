@@ -950,62 +950,122 @@ void DumpGroup ( CEntryRootGroup* poEntryRootGroup, odb::CVectorRoot voObjectRoo
 	CMapString2VectorRoot mStr2Objects;
 	ProcessConstraints ( dynamic_cast<CEntryRoot*>(poEntryRootGroup), voObjectRoot, mStr2Objects );
 
-	CMapString2VectorRoot::iterator mIt    = mStr2Objects.begin();
-	CMapString2VectorRoot::iterator mItEnd = mStr2Objects.end();
+        if ( poEntryRootGroup->GetSortOrder()  == sortorder_inc )
+        {
+            CMapString2VectorRoot::reverse_iterator mIt    = mStr2Objects.rbegin();
+            CMapString2VectorRoot::reverse_iterator mItEnd = mStr2Objects.rend();
+            for ( ; mIt != mItEnd; ++mIt )
+            {
+                CEntryRoot::iterator eIt	= poEntryRootGroup->begin();
+                CEntryRoot::iterator eItEnd = poEntryRootGroup->end();
 
-	for ( ; mIt != mItEnd; ++mIt )
-		{
-		CEntryRoot::iterator eIt	= poEntryRootGroup->begin();
-		CEntryRoot::iterator eItEnd = poEntryRootGroup->end();
+                for ( ; eIt != eItEnd; ++eIt )
+                {
+                    CEntry* poEntry = (*eIt);
 
-		for ( ; eIt != eItEnd; ++eIt )
-			{
-			CEntry* poEntry = (*eIt);
+                    switch ( poEntry->Rtti() )
+                    {			
+                        case CEntryRootFor::rtti:
+                            DumpFor ( dynamic_cast<CEntryRootFor*>(poEntry), mIt->second );
+                            break;
 
-			switch ( poEntry->Rtti() )
-				{			
-				case CEntryRootFor::rtti:
-					DumpFor ( dynamic_cast<CEntryRootFor*>(poEntry), mIt->second );
-					break;
-					
-				case CEntryRootGroup::rtti:
-					DumpGroup ( dynamic_cast<CEntryRootGroup*>(poEntry), mIt->second );
-					break;
-				
-				case CEntryRootBib::rtti:
-					CERR << "%%BIB%% does not make any sense at that level!" << std::endl;
-					break;
+                        case CEntryRootGroup::rtti:
+                            DumpGroup ( dynamic_cast<CEntryRootGroup*>(poEntry), mIt->second );
+                            break;
 
-				case CEntryRoot::rtti:
-					CERR << "PANIK!" << std::endl;	
-					return;
-					break;
-				
-				case CEntryText::rtti:	
-					Write ( poEntry->Dump() );
-					break;
-				
-				case CEntryCommand::rtti:
-					if ( poEntry->Dump() == "name" )
-						{
-						std::string sName = mIt->first;
-						Modify ( sName, dynamic_cast<CEntryCommand*>(poEntry)->GetModifier(), false );
-						Write ( sName );
-						}
-					else CERR << "Only command %%name%% recognized at that level!" << std::endl;
-					break;
+                        case CEntryRootBib::rtti:
+                            CERR << "%%BIB%% does not make any sense at that level!" << std::endl;
+                            break;
 
-				case CEntryRootReduce::rtti:
-					DumpReduce ( dynamic_cast<CEntryRootReduce*>(poEntry), mIt->second ); 
-					break;
+                        case CEntryRoot::rtti:
+                            CERR << "PANIK!" << std::endl;	
+                            return;
+                            break;
 
-				default:
-					CERR << "PANIK: Unknown rtti!" << std::endl;
-					return;	
-					break;
-				}
-			}
-		}
+                        case CEntryText::rtti:	
+                            Write ( poEntry->Dump() );
+                            break;
+
+                        case CEntryCommand::rtti:
+                            if ( poEntry->Dump() == "name" )
+                            {
+                                std::string sName = mIt->first;
+                                Modify ( sName, dynamic_cast<CEntryCommand*>(poEntry)->GetModifier(), false );
+                                Write ( sName );
+                            }
+                            else CERR << "Only command %%name%% recognized at that level!" << std::endl;
+                            break;
+
+                        case CEntryRootReduce::rtti:
+                            DumpReduce ( dynamic_cast<CEntryRootReduce*>(poEntry), mIt->second ); 
+                            break;
+
+                        default:
+                            CERR << "PANIK: Unknown rtti!" << std::endl;
+                            return;	
+                            break;
+                    }
+                }
+            }
+        }
+        else // sortorder_dec
+        {
+            CMapString2VectorRoot::iterator mIt    = mStr2Objects.begin();
+            CMapString2VectorRoot::iterator mItEnd = mStr2Objects.end();
+            for ( ; mIt != mItEnd; ++mIt )
+            {
+                CEntryRoot::iterator eIt	= poEntryRootGroup->begin();
+                CEntryRoot::iterator eItEnd = poEntryRootGroup->end();
+
+                for ( ; eIt != eItEnd; ++eIt )
+                {
+                    CEntry* poEntry = (*eIt);
+
+                    switch ( poEntry->Rtti() )
+                    {			
+                        case CEntryRootFor::rtti:
+                            DumpFor ( dynamic_cast<CEntryRootFor*>(poEntry), mIt->second );
+                            break;
+
+                        case CEntryRootGroup::rtti:
+                            DumpGroup ( dynamic_cast<CEntryRootGroup*>(poEntry), mIt->second );
+                            break;
+
+                        case CEntryRootBib::rtti:
+                            CERR << "%%BIB%% does not make any sense at that level!" << std::endl;
+                            break;
+
+                        case CEntryRoot::rtti:
+                            CERR << "PANIK!" << std::endl;	
+                            return;
+                            break;
+
+                        case CEntryText::rtti:	
+                            Write ( poEntry->Dump() );
+                            break;
+
+                        case CEntryCommand::rtti:
+                            if ( poEntry->Dump() == "name" )
+                            {
+                                std::string sName = mIt->first;
+                                Modify ( sName, dynamic_cast<CEntryCommand*>(poEntry)->GetModifier(), false );
+                                Write ( sName );
+                            }
+                            else CERR << "Only command %%name%% recognized at that level!" << std::endl;
+                            break;
+
+                        case CEntryRootReduce::rtti:
+                            DumpReduce ( dynamic_cast<CEntryRootReduce*>(poEntry), mIt->second ); 
+                            break;
+
+                        default:
+                            CERR << "PANIK: Unknown rtti!" << std::endl;
+                            return;	
+                            break;
+                    }
+                }
+            }
+        }
 	}
 
 
